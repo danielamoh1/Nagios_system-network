@@ -27,7 +27,8 @@
 5. **Dashboard Development:** Set up Grafana and integrate it with Nagios and Suricata for a comprehensive monitoring view.
 6. **Testing & Documentation:** Test the entire setup thoroughly and document the setup process, configuration, and usage in a README file for GitHub.
 
-#################################################################################
+###########################################################################################################################################
+
 
 Environment Setup for Nagios
 Nagios Core Installation on CentOS:
