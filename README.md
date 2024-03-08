@@ -96,7 +96,7 @@ Ensure Nagios correctly monitors specified metrics and services.
 Verify Suricata detects intrusions as per the configured rules.
 
 
-=======================================================================================================
+=====================================================================================
 
 More in depth practical steps guides
 
