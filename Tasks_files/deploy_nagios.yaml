@@ -1,0 +1,55 @@
+---
+- name: Deploy Nagios
+  hosts: monitoring_servers
+  become: yes
+  tasks:
+    - name: Install required packages
+      yum:
+        name:
+          - gcc
+          - glibc
+          - glibc-common
+          - wget
+          - unzip
+          - httpd
+          - php
+          - gd
+          - gd-devel
+          - perl
+          - postfix
+        state: present
+
+    - name: Download Nagios
+      get_url:
+        url: https://assets.nagios.com/downloads/nagioscore/releases/nagios-4.4.6.tar.gz
+        dest: /tmp/nagios.tar.gz
+
+    - name: Extract Nagios
+      unarchive:
+        src: /tmp/nagios.tar.gz
+        dest: /tmp
+        remote_src: yes
+
+    - name: Compile and Install Nagios
+      command: "{{ item }}"
+      with_items:
+        - './configure --with-httpd-conf=/etc/httpd/conf.d'
+        - make all
+        - make install
+        - make install-commandmode
+        - make install-init
+        - make install-config
+        - make install-webconf
+      args:
+        chdir: /tmp/nagios-4.4.6
+
+    - name: Create nagiosadmin User for Web Interface
+      command: htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin
+      args:
+        creates: /usr/local/nagios/etc/htpasswd.users
+
+    - name: Start and Enable httpd
+      service:
+        name: httpd
+        state: started
+        enabled: yes
