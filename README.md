@@ -94,3 +94,20 @@ Customize Grafana dashboards for monitoring and analysis.
 Thoroughly Test the Setup:
 Ensure Nagios correctly monitors specified metrics and services.
 Verify Suricata detects intrusions as per the configured rules.
+
+
+==========================================================================================================================================
+
+More in depth practical steps guides
+
+1. **Set Up Network Interfaces:**
+Open /etc/suricata/suricata.yaml and find the section af-packet:. Here, specify the network interface you want Suricata to monitor.
+
+2. **Specify Rule Files:**
+In the same suricata.yaml file, locate the rule-files: section and include your desired rule files. You can use community-sourced rules like Emerging Threats or your custom rules.
+
+3. **Custom Rules:**
+If creating custom rules, add them to /etc/suricata/rules/ directory. Example of a custom rule file custom.rules:
+```
+alert tcp any any -> any 80 (msg:"Possible HTTP traffic detected"; sid:1000001;)
+```
