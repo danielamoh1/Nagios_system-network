@@ -1,0 +1,32 @@
+---
+- name: Deploy Suricata
+  hosts: gateway_servers
+  become: yes
+  tasks:
+    - name: Add Suricata PPA (Ubuntu)
+      apt_repository:
+        repo: ppa:oisf/suricata-stable
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: Install Suricata
+      package:
+        name: suricata
+        state: latest
+
+    - name: Copy Suricata Configuration
+      template:
+        src: suricata.yaml.j2
+        dest: /etc/suricata/suricata.yaml
+
+    - name: Copy Custom Rule Files
+      copy:
+        src: "{{ item }}"
+        dest: /etc/suricata/rules/
+      with_fileglob:
+        - "rules/*.rules"
+
+    - name: Restart Suricata to Apply Configuration
+      service:
+        name: suricata
+        state: restarted
