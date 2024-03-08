@@ -27,7 +27,7 @@
 5. **Dashboard Development:** Set up Grafana and integrate it with Nagios and Suricata for a comprehensive monitoring view.
 6. **Testing & Documentation:** Test the entire setup thoroughly and document the setup process, configuration, and usage in a README file for GitHub.
 
-#######################################################################################################################################################################
+#################################################################################
 
 Environment Setup for Nagios
 Nagios Core Installation on CentOS:
@@ -89,6 +89,7 @@ Set up data sources in Grafana for Nagios and Suricata metrics and logs.
 Customize Grafana dashboards for monitoring and analysis.
 
 ***Testing & Documentation***
+
 Thoroughly Test the Setup:
 Ensure Nagios correctly monitors specified metrics and services.
 Verify Suricata detects intrusions as per the configured rules.
